@@ -1,4 +1,4 @@
-# Api-Gateway
+# Api-Gateway 🌐
 
 **Api-Gateway** is a NestJS REST API that acts as the entry point for the **Pokecenter-Microservices** architecture.
 
@@ -10,6 +10,7 @@ This gateway handles all incoming HTTP requests and forwards them to the corresp
 
 - **Pokémon Endpoints:** Create, read, update, and delete Pokémon by communicating with `pokemon-ms`.
 - **Trainers Endpoints:** Create, read, update, and delete trainers by communicating with `trainers-ms`.
+- **Trainer Relationship:** Each Pokémon is linked to a Trainer via `trainerId` (one-to-many relationship).
 - **HTTP Communication:** Listens on port `3000` for REST requests from Postman or any frontend.
 - **TCP Communication:** Forwards requests to microservices running on ports `3001` and `3002`.
 
@@ -55,6 +56,12 @@ Before you begin, make sure you have the following installed:
    npm run start:dev
 ```
    The API will be running at `http://localhost:3000`.
+
+---
+
+## Documentation
+
+- [Postman API Documentation](AQUI_VA_TU_ENLACE) - Complete endpoint documentation with test data and descriptions, ready to be imported or viewed online.
 
 ---
 
