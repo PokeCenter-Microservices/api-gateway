@@ -14,6 +14,14 @@ import { TrainersGatewayService } from './trainers-gateway.service';
           port: 3002,
         },
       },
+      {
+        name: 'POKEMON_SERVICE',
+        transport: Transport.TCP,
+        options: {
+          host: 'localhost',
+          port: 3001,
+        },
+      },
     ]),
   ],
   controllers: [TrainersGatewayController],

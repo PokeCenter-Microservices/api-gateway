@@ -22,6 +22,11 @@ export class TrainersGatewayController {
     return this.trainersGatewayService.findOne(id);
   }
 
+  @Get(':id/pokemon')
+  findTrainerWithPokemon(@Param('id', ParseIntPipe) id: number) {
+    return this.trainersGatewayService.findTrainerWithPokemon(id);
+  }
+
   @Patch(':id')
   update(@Param('id', ParseIntPipe) id: number, @Body() updateTrainersGatewayDto: UpdateTrainersGatewayDto) {
     return this.trainersGatewayService.update(id, updateTrainersGatewayDto);
