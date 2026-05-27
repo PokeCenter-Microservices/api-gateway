@@ -63,7 +63,7 @@ Before you begin, make sure you have the following installed:
 
 ## Documentation
 
-- [Postman API Documentation](AQUI_VA_TU_ENLACE) - Complete endpoint documentation with test data and descriptions, ready to be imported or viewed online.
+- [Postman API Documentation](https://documenter.getpostman.com/view/48535719/2sBXwmRYvP) - Complete endpoint documentation with test data and descriptions, ready to be imported or viewed online.
 
 ---
 
