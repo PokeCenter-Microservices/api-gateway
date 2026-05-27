@@ -27,9 +27,8 @@ export class PokemonGatewayService {
       );
     }
 
-    return this.pokemonServiceClient.send(
-      { cmd: 'createPokemon' },
-      createPokemonGatewayDto,
+    return firstValueFrom(
+      this.pokemonServiceClient.send({ cmd: 'createPokemon' }, createPokemonGatewayDto),
     );
   }
 
@@ -41,7 +40,22 @@ export class PokemonGatewayService {
     return this.pokemonServiceClient.send({ cmd: 'findOnePokemon' }, id);
   }
 
-  update(id: number, updatePokemonGatewayDto: UpdatePokemonGatewayDto) {
+  async update(id: number, updatePokemonGatewayDto: UpdatePokemonGatewayDto) {
+    if (updatePokemonGatewayDto.trainerId) {
+      const trainer = await firstValueFrom(
+        this.trainersServiceClient.send(
+          { cmd: 'findOneTrainer' },
+          updatePokemonGatewayDto.trainerId,
+        ),
+      );
+
+      if (!trainer) {
+        throw new NotFoundException(
+          `Entrenador con ID ${updatePokemonGatewayDto.trainerId} no encontrado`,
+        );
+      }
+    }
+
     return this.pokemonServiceClient.send(
       { cmd: 'updatePokemon' },
       { id, ...updatePokemonGatewayDto },

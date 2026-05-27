@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, BadRequestException } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { CreateTrainersGatewayDto } from './dto/create-trainers-gateway.dto';
 import { UpdateTrainersGatewayDto } from './dto/update-trainers-gateway.dto';
@@ -30,12 +30,11 @@ export class TrainersGatewayService {
       this.trainersServiceClient.send({ cmd: 'findOneTrainer' }, id),
     );
     const pokemon = await firstValueFrom(
-      this.pokemonServiceClient.send({ cmd: 'findAllPokemons' }, {}),
+      this.pokemonServiceClient.send({ cmd: 'findPokemonsByTrainer' }, id),
     );
-    const trainerPokemon = pokemon.filter((p: any) => p.trainerId === id);
     return {
       trainer,
-      pokemon: trainerPokemon,
+      pokemon,
     };
   }
 
@@ -43,7 +42,17 @@ export class TrainersGatewayService {
     return this.trainersServiceClient.send({ cmd: 'updateTrainer' }, { id, ...updateTrainersGatewayDto });
   }
 
-  remove(id: number) {
+  async remove(id: number) {
+    const pokemon = await firstValueFrom(
+      this.pokemonServiceClient.send({ cmd: 'findPokemonsByTrainer' }, id),
+    );
+
+    if (pokemon.length > 0) {
+      throw new BadRequestException(
+        `No puedes eliminar el entrenador con ID ${id} porque tiene ${pokemon.length} Pokémon asignados`,
+      );
+    }
+
     return this.trainersServiceClient.send({ cmd: 'deleteTrainer' }, id);
   }
 }

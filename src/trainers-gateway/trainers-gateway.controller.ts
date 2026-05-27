@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
+import { Controller, Get, Post, Body, Put, Param, Delete, ParseIntPipe } from '@nestjs/common';
 import { TrainersGatewayService } from './trainers-gateway.service';
 import { CreateTrainersGatewayDto } from './dto/create-trainers-gateway.dto';
 import { UpdateTrainersGatewayDto } from './dto/update-trainers-gateway.dto';
@@ -27,7 +27,7 @@ export class TrainersGatewayController {
     return this.trainersGatewayService.findTrainerWithPokemon(id);
   }
 
-  @Patch(':id')
+  @Put(':id')
   update(@Param('id', ParseIntPipe) id: number, @Body() updateTrainersGatewayDto: UpdateTrainersGatewayDto) {
     return this.trainersGatewayService.update(id, updateTrainersGatewayDto);
   }

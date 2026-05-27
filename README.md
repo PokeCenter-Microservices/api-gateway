@@ -11,6 +11,8 @@ This gateway handles all incoming HTTP requests and forwards them to the corresp
 - **Pokémon Endpoints:** Create, read, update, and delete Pokémon by communicating with `pokemon-ms`.
 - **Trainers Endpoints:** Create, read, update, and delete trainers by communicating with `trainers-ms`.
 - **Trainer-Pokémon Relationship:** Get a trainer along with all their Pokémon in a single request via `GET /trainers/:id/pokemon`.
+- **Trainer validation:** When creating or updating a Pokémon, the gateway validates that the `trainerId` exists before proceeding.
+- **Delete protection:** A trainer cannot be deleted if they have Pokémon assigned.
 - **HTTP Communication:** Listens on port `3000` for REST requests from Postman or any frontend.
 - **TCP Communication:** Forwards requests to microservices running on ports `3001` and `3002`.
 
@@ -74,7 +76,7 @@ Before you begin, make sure you have the following installed:
 | `POST` | `/pokemon` | Create a new Pokémon |
 | `GET` | `/pokemon` | Get all Pokémon |
 | `GET` | `/pokemon/:id` | Get a Pokémon by ID |
-| `PATCH` | `/pokemon/:id` | Update a Pokémon |
+| `PUT` | `/pokemon/:id` | Update a Pokémon |
 | `DELETE` | `/pokemon/:id` | Delete a Pokémon |
 
 ### Trainers
@@ -85,8 +87,8 @@ Before you begin, make sure you have the following installed:
 | `GET` | `/trainers` | Get all trainers |
 | `GET` | `/trainers/:id` | Get a trainer by ID |
 | `GET` | `/trainers/:id/pokemon` | Get a trainer with all their Pokémon |
-| `PATCH` | `/trainers/:id` | Update a trainer |
-| `DELETE` | `/trainers/:id` | Delete a trainer |
+| `PUT` | `/trainers/:id` | Update a trainer |
+| `DELETE` | `/trainers/:id` | Delete a trainer (only if no Pokémon assigned) |
 
 ---
 
