@@ -61,6 +61,7 @@ Before you begin, make sure you have the following installed:
 ## Endpoints
 
 ### Pokémon
+
 | Method | Endpoint | Description |
 |---|---|---|
 | `POST` | `/pokemon` | Create a new Pokémon |
@@ -70,6 +71,7 @@ Before you begin, make sure you have the following installed:
 | `DELETE` | `/pokemon/:id` | Delete a Pokémon |
 
 ### Trainers
+
 | Method | Endpoint | Description |
 |---|---|---|
 | `POST` | `/trainers` | Create a new trainer |
